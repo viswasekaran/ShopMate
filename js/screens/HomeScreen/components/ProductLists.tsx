@@ -82,7 +82,7 @@ const ProductLists = () => {
   );
 };
 
-export default ProductLists;
+export default React.memo(ProductLists);
 
 const styles = StyleSheet.create({
   container: {

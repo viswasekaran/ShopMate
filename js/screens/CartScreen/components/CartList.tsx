@@ -23,6 +23,7 @@ const CartList = () => {
       )}
     </>
   );
+
   const renderListEmptyComp = () => {
     return (
       <View>
@@ -50,7 +51,7 @@ const CartList = () => {
   );
 };
 
-export default CartList;
+export default React.memo(CartList);
 
 const styles = StyleSheet.create({
   container: {

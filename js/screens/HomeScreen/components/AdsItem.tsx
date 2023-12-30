@@ -3,19 +3,9 @@ import {Image, StyleSheet, View} from 'react-native';
 import {COLORS} from '../../../../themes/colors';
 import ImageSkeleton from '../../../assets/Icons/ImageSkeleton';
 import {CText} from '../../../components';
+import {InterfaceAdsItemProps} from '../../types/HomeScreen';
 
-interface ItemProps {
-  imgLink: string;
-  actionText: string;
-  offerText: string;
-  offerCondition: string;
-  bg_color: string;
-}
-interface AdsItemProps {
-  item: ItemProps;
-}
-
-const AdsItem = ({item}: AdsItemProps) => {
+const AdsItem = ({item}: InterfaceAdsItemProps) => {
   const {bg_color, imgLink, actionText, offerCondition, offerText} = item;
   //@ts-ignore
   const ImageData = imgLink ? <Image source={imgLink} /> : <ImageSkeleton />;
@@ -36,7 +26,7 @@ const AdsItem = ({item}: AdsItemProps) => {
   );
 };
 
-export default AdsItem;
+export default React.memo(AdsItem);
 
 const styles = StyleSheet.create({
   container: {

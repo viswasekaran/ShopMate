@@ -17,7 +17,7 @@ const ProductDetailsInfo = ({details}: {details: string}) => {
   );
 };
 
-export default ProductDetailsInfo;
+export default React.memo(ProductDetailsInfo);
 
 const styles = StyleSheet.create({
   container: {

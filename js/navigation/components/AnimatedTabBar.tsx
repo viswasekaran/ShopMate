@@ -8,11 +8,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Path, Svg} from 'react-native-svg';
-import {TabBarComponent} from './TabBarComponent';
+import TabBarComponent from './TabBarComponent';
 
 const {height} = Dimensions.get('screen');
 
-export const AnimatedTabBar = ({
+const AnimatedTabBar = ({
   state: {index: activeIndex, routes},
   navigation,
   descriptors,
@@ -90,3 +90,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
 });
+
+export default React.memo(AnimatedTabBar);

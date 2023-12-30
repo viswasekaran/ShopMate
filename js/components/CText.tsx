@@ -1,24 +1,8 @@
 import React from 'react';
-import {Text as RNText, StyleSheet, TextStyle} from 'react-native';
+import {Text as RNText, StyleSheet} from 'react-native';
+import {InterfaceCTextProps} from './types';
 
-interface TextProps {
-  style?: TextStyle;
-  font?: 'Manrope' | 'ManropeBold' | 'ManropeSemiBold' | 'ManropeMedium';
-  heading?:
-    | 'H1'
-    | 'H2'
-    | 'H3'
-    | 'H4'
-    | 'Body1'
-    | 'Body2'
-    | 'Label'
-    | 'Button1'
-    | 'Button2';
-  weight?: 'Bold' | 'Semibold' | 'Medium' | 'Regular';
-  children?: React.ReactNode;
-}
-
-const CText: React.FC<TextProps> = ({
+const CText: React.FC<InterfaceCTextProps> = ({
   style,
   font = 'Manrope',
   heading,
@@ -94,4 +78,4 @@ const styles = StyleSheet.create({
   text: {},
 });
 
-export default CText;
+export default React.memo(CText);

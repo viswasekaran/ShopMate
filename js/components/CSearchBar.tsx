@@ -2,14 +2,9 @@ import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {COLORS} from '../../themes/colors';
 import SearchIcon from '../assets/Icons/SearchIcon';
+import {InterfaceCSearchBarProps} from './types';
 
-interface SearchableComponentProps {
-  placeholder: string;
-  handleSearchChange: (query: string) => void;
-  searchValue: string;
-}
-
-const CSearchBar: React.FC<SearchableComponentProps> = ({
+const CSearchBar: React.FC<InterfaceCSearchBarProps> = ({
   placeholder,
   handleSearchChange,
   searchValue,
@@ -61,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CSearchBar;
+export default React.memo(CSearchBar);

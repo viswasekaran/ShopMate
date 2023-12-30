@@ -1,65 +1,49 @@
 import React, {useState} from 'react';
-import {Dimensions, FlatList, Image, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {COLORS} from '../../themes/colors';
-import {CCircularButton} from '.';
-import {FavouriteIcon} from '../assets/Icons';
-const {width} = Dimensions.get('screen');
-const CCarousel = ({
-  items,
-  enableFavBtn = false,
-}: {
-  items: string[];
-  enableFavBtn?: boolean;
-}) => {
+import {CarouselIndicator, MemoizedCarouselItem} from './CCarouselItem';
+import {InterfaceCCaurouselProps} from './types';
+
+const CCarousel = ({items, enableFavBtn = false}: InterfaceCCaurouselProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const renderItem = ({item}: {item: string}) => {
-    return (
-      <View>
-        <Image
-          resizeMode="contain"
-          source={{uri: item}}
-          style={styles.carouselImage}
-        />
-        {enableFavBtn && (
-          <CCircularButton Icon={FavouriteIcon} style={styles.addFavBtn} />
-        )}
-      </View>
-    );
-  };
+  const renderItem = ({item, index}: {item: string; index: number}) => (
+    <MemoizedCarouselItem
+      item={item}
+      index={index}
+      enableFavBtn={enableFavBtn}
+    />
+  );
 
   return (
     <View style={styles.container}>
       <FlatList
         data={items}
         renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onMomentumScrollEnd={event =>
           setActiveIndex(
-            event.nativeEvent.contentOffset.x /
-              event.nativeEvent.layoutMeasurement.width,
+            Math.floor(
+              event.nativeEvent.contentOffset.x /
+                event.nativeEvent.layoutMeasurement.width,
+            ),
           )
         }
         contentContainerStyle={styles.contentContainer}
       />
       <View style={styles.indicatorContainer}>
         {items.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.indicator,
-              activeIndex === index && styles.indicatorActive,
-            ]}
-          />
+          <CarouselIndicator key={index} active={activeIndex === index} />
         ))}
       </View>
     </View>
   );
 };
 
-export default CCarousel;
+export default React.memo(CCarousel);
 
 const styles = StyleSheet.create({
   container: {},
@@ -77,18 +61,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     backgroundColor: COLORS.GREY_300,
   },
-  carouselImage: {width, height: 210},
   indicatorActive: {
     backgroundColor: COLORS.SECONDARY,
   },
   contentContainer: {marginVertical: 12},
-  addFavBtn: {
-    width: 45,
-    height: 45,
-    backgroundColor: 'white',
-    position: 'absolute',
-    alignSelf: 'flex-end',
-    marginVertical: 16,
-    right: 19,
-  },
 });

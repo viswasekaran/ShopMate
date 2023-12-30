@@ -4,22 +4,18 @@ import {COLORS} from '../../../../themes/colors';
 import {CButton, CText} from '../../../components';
 import {TEXTS} from '../../../constants/texts';
 import {useAppSelector} from '../../../hooks/hook';
+import {getCartCheckoutTotal} from '../../../helpers/cartscreen.utils';
 
 const CartCheckoutDetails = () => {
   const {cartItems} = useAppSelector(state => state.cartSlice);
 
   const deliveryFee = cartItems.length > 0 ? 10 : 0;
 
-  const total = useMemo(() => {
-    return cartItems
-      .reduce((prev, current) => {
-        const itemCost = current.price * current.count;
-        return prev + itemCost;
-      }, 0)
-      .toFixed(2);
-  }, [cartItems]);
-
-  const finalTotal = (parseFloat(total) + deliveryFee).toFixed(2);
+  const {finalTotal, total} = useMemo(() => {
+    const totalValue = getCartCheckoutTotal({cartItems});
+    const finalTotalValue = (parseFloat(totalValue) + deliveryFee).toFixed(2);
+    return {total: totalValue, finalTotal: finalTotalValue};
+  }, [cartItems, deliveryFee]);
 
   const checkoutData = [
     {question: 'Subtotal', answer: total},
@@ -39,7 +35,6 @@ const CartCheckoutDetails = () => {
           </CText>
         </View>
       ))}
-
       <CButton variant="filled" title={TEXTS.PROCEED_TO_CHECKOUT} />
     </View>
   );
@@ -68,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartCheckoutDetails;
+export default React.memo(CartCheckoutDetails);

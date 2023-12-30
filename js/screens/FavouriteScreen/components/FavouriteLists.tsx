@@ -70,7 +70,7 @@ const FavouriteLists = ({data}: {data: Product[]}) => {
   );
 };
 
-export default FavouriteLists;
+export default React.memo(FavouriteLists);
 
 const styles = StyleSheet.create({
   container: {

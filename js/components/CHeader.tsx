@@ -34,7 +34,7 @@ const CHeader = ({title, RightIcon}: {title?: string; RightIcon?: any}) => {
   );
 };
 
-export default CHeader;
+export default React.memo(CHeader);
 
 const styles = StyleSheet.create({
   container: {

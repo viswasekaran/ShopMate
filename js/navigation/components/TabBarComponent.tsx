@@ -10,7 +10,7 @@ type TabBarComponentProps = {
   onPress: () => void;
 };
 
-export const TabBarComponent = ({
+const TabBarComponent = ({
   active,
   options,
   onLayout,
@@ -71,3 +71,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+export default React.memo(TabBarComponent);

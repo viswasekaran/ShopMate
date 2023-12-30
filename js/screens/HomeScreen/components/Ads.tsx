@@ -32,4 +32,4 @@ const Ads = () => {
   );
 };
 
-export default Ads;
+export default React.memo(Ads);

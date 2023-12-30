@@ -7,26 +7,22 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {COLORS} from '../../themes/colors';
-import {Product} from '../api/products/product.type';
+import {Easing} from 'react-native-reanimated';
 import {CCircularButton, CText} from '.';
+import {COLORS} from '../../themes/colors';
 import {useAppDispatch} from '../hooks/hook';
 import {
   decrementCartItem,
   incrementCartItem,
 } from '../redux/features/cartSlice';
-import {Easing} from 'react-native-reanimated';
+import {InterfaceCProductListProps} from './types';
 
 const {width} = Dimensions.get('screen');
 const CProductListItem = ({
   item,
   RightIcon,
   rightIconPress,
-}: {
-  item: Product;
-  RightIcon?: any;
-  rightIconPress?: (item: Product) => void;
-}) => {
+}: InterfaceCProductListProps) => {
   const dispatch = useAppDispatch();
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -106,7 +102,7 @@ const CProductListItem = ({
   );
 };
 
-export default CProductListItem;
+export default React.memo(CProductListItem);
 
 const styles = StyleSheet.create({
   container: {

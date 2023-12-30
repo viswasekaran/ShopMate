@@ -16,7 +16,7 @@ import CategoryScreen from '../screens/CategoryScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import MoreScreen from '../screens/MoreScreen';
-import {AnimatedTabBar} from './components/AnimatedTabBar';
+import AnimatedTabBar from './components/AnimatedTabBar';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,26 +1,21 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {CCircularButton, CText} from '.';
 import {COLORS} from '../../themes/colors';
-import {Product} from '../api/products/product.type';
 import {FavouriteIcon} from '../assets/Icons';
 import ImageSkeleton from '../assets/Icons/ImageSkeleton';
 import {getFavIconStyle} from '../helpers/product.utils';
 import {useAppDispatch, useAppSelector} from '../hooks/hook';
 import {addCart} from '../redux/features/cartSlice';
 import {addFavourite, removeFavourite} from '../redux/features/favouriteSlice';
-import {useNavigation} from '@react-navigation/native';
+import {InterfaceCProductItemProps} from './types';
 
-interface ProductItemProps {
-  data: Product;
-  onPress: () => void;
-}
-
-const ProductItem: FC<ProductItemProps> = ({data, onPress}) => {
+const ProductItem: FC<InterfaceCProductItemProps> = ({data, onPress}) => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
-  const {favouriteItems} = useAppSelector(state => state.favouriteSlice);
 
+  const {favouriteItems} = useAppSelector(state => state.favouriteSlice);
   const [isFavourite, setIsFavourite] = useState(false);
 
   const {thumbnail: image, title: name, price} = data;
@@ -124,4 +119,4 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK_70,
   },
 });
-export default ProductItem;
+export default React.memo(ProductItem);

@@ -8,7 +8,7 @@ const WelcomeHeader = () => {
   return (
     <View style={styles.container}>
       <CText heading="H3" style={styles.welcomeNote}>
-        Hey, Rahul
+        Hey, Viswa
       </CText>
       <CartIcon />
     </View>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeHeader;
+export default React.memo(WelcomeHeader);

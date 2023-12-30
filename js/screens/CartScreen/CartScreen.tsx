@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import CHeader from '../../components/CHeader';
-import {TEXTS} from '../../constants/texts';
+import {getCartScreenHeaderText} from '../../helpers/cartscreen.utils';
 import {useAppSelector} from '../../hooks/hook';
 import {CartCheckoutDetails, CartList} from './components';
 
@@ -9,9 +9,8 @@ const CartScreen = () => {
   const {cartItems} = useAppSelector(state => state.cartSlice);
 
   const getHeaderText = useMemo(() => {
-    const cartItemsLength = cartItems.length;
-    return `${TEXTS.SHOPPING_CART} (${cartItemsLength})`;
-  }, [cartItems.length]);
+    return getCartScreenHeaderText({cartItems: cartItems});
+  }, [cartItems]);
 
   return (
     <SafeAreaView style={styles.container}>

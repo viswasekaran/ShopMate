@@ -18,7 +18,7 @@ const DeliveryInfo = () => {
   );
 };
 
-export default DeliveryInfo;
+export default React.memo(DeliveryInfo);
 
 const styles = StyleSheet.create({
   container: {

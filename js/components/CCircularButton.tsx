@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, TextStyle, TouchableOpacity, ViewStyle} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CText} from '.';
 import {COLORS} from '../../themes/colors';
+import {InterfaceCCircularBtnProps} from './types';
 
 const CCircularButton = ({
   color = COLORS.PRIMARY,
@@ -10,14 +11,7 @@ const CCircularButton = ({
   Icon,
   style,
   onPress,
-}: {
-  color?: string;
-  text?: string;
-  textStyle?: TextStyle;
-  Icon?: any;
-  style?: ViewStyle;
-  onPress?: () => void;
-}) => {
+}: InterfaceCCircularBtnProps) => {
   return (
     <TouchableOpacity
       style={[styles.container, {backgroundColor: color}, style]}
@@ -28,7 +22,7 @@ const CCircularButton = ({
   );
 };
 
-export default CCircularButton;
+export default React.memo(CCircularButton);
 
 const styles = StyleSheet.create({
   container: {

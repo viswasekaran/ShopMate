@@ -8,24 +8,18 @@ import {
 import {CText} from '../../../components';
 import {ArrowDownIcon} from '../../../assets/Icons';
 import {COLORS} from '../../../../themes/colors';
+import {InterfaceDeliveryInfoItemProps} from '../../types/HomeScreen';
 
-interface DeliveryInfoItemProps {
-  label: string;
-  value: string;
-  textStyle?: any;
-  containerStyle?: any;
-  onPress?: (event: GestureResponderEvent) => void;
-}
 const areEqual = (
-  prevProps: DeliveryInfoItemProps,
-  nextProps: DeliveryInfoItemProps,
+  prevProps: InterfaceDeliveryInfoItemProps,
+  nextProps: InterfaceDeliveryInfoItemProps,
 ) => {
   return (
     prevProps.label === nextProps.label && prevProps.value === nextProps.value
   );
 };
 
-const DeliveryInfoItem: React.FC<DeliveryInfoItemProps> = React.memo(
+const DeliveryInfoItem: React.FC<InterfaceDeliveryInfoItemProps> = React.memo(
   ({label, value, textStyle, containerStyle, onPress}) => {
     const memoizedTextStyle = useMemo(
       () => [styles.deliveryToTxt, textStyle],
@@ -81,4 +75,4 @@ const styles = StyleSheet.create({
   addressContainer: {flexDirection: 'row', alignItems: 'center'},
 });
 
-export default DeliveryInfoItem;
+export default React.memo(DeliveryInfoItem);

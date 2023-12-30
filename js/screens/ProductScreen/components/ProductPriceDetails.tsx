@@ -3,7 +3,12 @@ import {StyleSheet, View} from 'react-native';
 import {COLORS} from '../../../../themes/colors';
 import {CText} from '../../../components';
 
-const PriceDetails = ({price, discount}: {price: string; discount: string}) => {
+interface PriceDetails {
+  price: string;
+  discount: string;
+}
+
+const PriceDetails = ({price, discount}: PriceDetails) => {
   const BubbleText = useCallback(() => {
     return (
       <View style={styles.bubbleContainer}>
@@ -24,7 +29,7 @@ const PriceDetails = ({price, discount}: {price: string; discount: string}) => {
   );
 };
 
-export default PriceDetails;
+export default React.memo(PriceDetails);
 
 const styles = StyleSheet.create({
   container: {

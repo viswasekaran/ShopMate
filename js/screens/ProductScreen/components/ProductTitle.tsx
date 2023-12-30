@@ -25,7 +25,7 @@ const ProductTitle = ({data}: {data: Product}) => {
           fractions={1}
           imageSize={15}
           onFinishRating={() => {}}
-          style={{paddingVertical: 10, borderWidth: 0, alignSelf: 'flex-start'}}
+          style={styles.rating}
         />
         <CText heading="Body2" style={styles.reviewText}>
           {reviews} Reviews
@@ -35,7 +35,7 @@ const ProductTitle = ({data}: {data: Product}) => {
   );
 };
 
-export default ProductTitle;
+export default React.memo(ProductTitle);
 
 const styles = StyleSheet.create({
   container: {paddingHorizontal: 20},
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  rating: {paddingVertical: 10, borderWidth: 0, alignSelf: 'flex-start'},
   reviewText: {
     marginLeft: 8,
     color: COLORS.GREY_200,

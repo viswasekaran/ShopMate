@@ -2,14 +2,9 @@ import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CText} from '.';
 import {COLORS} from '../../themes/colors';
+import {InterfaceCButtonProps} from './types';
 
-interface ButtonProps {
-  title: string;
-  variant?: 'primary' | 'secondary' | 'filled';
-  onClick?: () => void;
-}
-
-const CButton: React.FC<ButtonProps> = ({
+const CButton: React.FC<InterfaceCButtonProps> = ({
   title,
   variant = 'primary',
   onClick,
@@ -45,7 +40,7 @@ const CButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default CButton;
+export default React.memo(CButton);
 
 const styles = StyleSheet.create({
   primaryBtn: {

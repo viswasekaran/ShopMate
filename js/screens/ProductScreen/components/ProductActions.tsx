@@ -25,7 +25,7 @@ const ProductActions = ({product}: {product: Product}) => {
   );
 };
 
-export default ProductActions;
+export default React.memo(ProductActions);
 
 const styles = StyleSheet.create({
   container: {
