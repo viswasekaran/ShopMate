@@ -1,23 +1,22 @@
-import React, {useCallback, useEffect, useMemo} from 'react';
-import {Alert, StyleSheet, View, FlatList, Dimensions} from 'react-native';
-import ProductItem from '../../../components/CProductItem';
-import {CText} from '../../../components';
-import {TEXTS} from '../../../constants/texts';
-import {COLORS} from '../../../../themes/colors';
-import {getAllProducts} from '../../../api/products/products';
-import {useAppDispatch, useAppSelector} from '../../../hooks/hook';
-import {setProducts} from '../../../redux/features/productSlice';
-import {Product} from '../../../api/products/product.type';
-import {Ads} from '.';
 import {useNavigation} from '@react-navigation/native';
+import React, {useCallback, useEffect, useMemo} from 'react';
+import {Alert, Dimensions, FlatList, StyleSheet, View} from 'react-native';
+import {Ads} from '.';
+import {COLORS} from '../../../../themes/colors';
+import {Product} from '../../../api/products/product.type';
+import {getAllProducts} from '../../../api/products/products';
+import {CText} from '../../../components';
+import ProductItem from '../../../components/CProductItem';
 import {SCREEN_NAME} from '../../../constants/screenName';
+import {TEXTS} from '../../../constants/texts';
+import {useAppDispatch} from '../../../hooks/hook';
+import {setProducts} from '../../../redux/features/productSlice';
 
 const {height} = Dimensions.get('screen');
 
-const ProductLists = () => {
+const ProductLists = ({products}: {products: Product[]}) => {
   const dispatch = useAppDispatch();
   const naviagtion = useNavigation();
-  const {products} = useAppSelector(state => state.productSlice);
 
   const fetchProducts = useCallback(async () => {
     const {products: productsData, isError, errorMsg} = await getAllProducts();

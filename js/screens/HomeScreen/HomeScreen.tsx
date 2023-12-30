@@ -5,13 +5,22 @@ import {COLORS} from '../../../themes/colors';
 import {CSearchBar} from '../../components';
 import {TEXTS} from '../../constants/texts';
 import {DeliveryInfo, ProductLists, WelcomeHeader} from './components';
+import {useAppSelector} from '../../hooks/hook';
 TextInput.defaultProps = {...TextInput.defaultProps, allowFontScaling: false};
 
 const HomeScreen = () => {
+  const {products} = useAppSelector(state => state.productSlice);
+
+  const [listedProducts, SetListedProducts] = useState(products);
+
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearchChange = (query: string) => {
     setSearchInput(query);
+    const filterdItems = products.filter(el =>
+      el.title.toLocaleLowerCase().includes(query.toLocaleLowerCase()),
+    );
+    SetListedProducts(filterdItems);
   };
 
   return (
@@ -24,7 +33,7 @@ const HomeScreen = () => {
         searchValue={searchInput}
       />
       <DeliveryInfo />
-      <ProductLists />
+      <ProductLists products={listedProducts} />
     </SafeAreaView>
   );
 };
